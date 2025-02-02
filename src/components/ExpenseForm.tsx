@@ -16,7 +16,7 @@ interface SharedCosts {
   other: number;
 }
 
-interface CalculationData {
+export interface CalculationData {
   person1: {
     name: string;
     income: number;

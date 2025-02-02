@@ -26,35 +26,63 @@ export function PersonalOverview({ name, income, expenses, percentage }: Persona
 
   return (
     <div className="p-6 bg-gray-800 rounded-lg">
-      <h2 className="text-xl font-semibold mb-6 text-white">{name} - Persoonlijk Overzicht</h2>
+      <h2 className="text-2xl font-semibold mb-6 text-white text-center">{name} - Persoonlijk Overzicht</h2>
       
-      <div className="space-y-4 text-gray-300">
+      <div className="space-y-6 text-gray-300">
         <div className="border-b border-gray-700 pb-4">
-          <h3 className="font-medium text-white mb-2">Inkomsten</h3>
-          <p>Maandelijks inkomen: €{income.toFixed(2)}</p>
-        </div>
-
-        <div className="border-b border-gray-700 pb-4">
-          <h3 className="font-medium text-white mb-2">Uitgaven</h3>
-          <div className="space-y-1">
-            <p>Huur ({percentage.toFixed(1)}%): €{expenses.rent.toFixed(2)}</p>
-            <p>Boodschappen: €{expenses.groceries.toFixed(2)}</p>
-            <p>Gas/Water/Licht: €{expenses.utilities.toFixed(2)}</p>
-            <p>Persoonlijke Abonnementen: €{expenses.personalSubscriptions.toFixed(2)}</p>
-            <p>Auto Kosten: €{expenses.carCosts.toFixed(2)}</p>
-            <p>Overige Lasten: €{expenses.other.toFixed(2)}</p>
-            <p className="font-medium text-white mt-2">Totaal Uitgaven: €{totalExpenses.toFixed(2)}</p>
+          <h3 className="font-medium text-white mb-3 text-xl">Inkomsten</h3>
+          <div className="flex justify-between text-lg">
+            <span>Maandelijks inkomen:</span>
+            <span className="text-blue-400">€{income.toFixed(2)}</span>
           </div>
         </div>
 
         <div className="border-b border-gray-700 pb-4">
-          <h3 className="font-medium text-white mb-2">Verdeling Resterend Bedrag</h3>
-          <div className="space-y-1">
-            <p>Beschikbaar: €{remainingMoney.toFixed(2)}</p>
-            <p>Sparen (20%): €{savings.toFixed(2)}</p>
-            <p>Fun Money (10%): €{funMoney.toFixed(2)}</p>
-            <p>Vakantie (10%): €{vacation.toFixed(2)}</p>
-            <p className="font-medium text-white mt-2">Uiteindelijk Vrij Besteedbaar: €{finalRemaining.toFixed(2)}</p>
+          <h3 className="font-medium text-white mb-3 text-xl">Uitgaven</h3>
+          <div className="space-y-2">
+            {Object.entries({
+              [`Huur (${percentage.toFixed(1)}%)`]: expenses.rent,
+              'Boodschappen': expenses.groceries,
+              'Gas/Water/Licht': expenses.utilities,
+              'Persoonlijke Abonnementen': expenses.personalSubscriptions,
+              'Auto Kosten': expenses.carCosts,
+              'Overige Lasten': expenses.other,
+            }).map(([label, value]) => (
+              <div key={label} className="flex justify-between text-lg">
+                <span>{label}:</span>
+                <span className="text-red-400">€{value.toFixed(2)}</span>
+              </div>
+            ))}
+            <div className="flex justify-between font-medium text-lg mt-3">
+              <span>Totaal Uitgaven:</span>
+              <span className="text-red-500">€{totalExpenses.toFixed(2)}</span>
+            </div>
+          </div>
+        </div>
+
+        <div className="border-b border-gray-700 pb-4">
+          <h3 className="font-medium text-white mb-3 text-xl">Sparen & Reserveren</h3>
+          <div className="space-y-2">
+            <div className="flex justify-between text-lg">
+              <span>Beschikbaar:</span>
+              <span className="text-blue-400">€{remainingMoney.toFixed(2)}</span>
+            </div>
+            <div className="flex justify-between text-lg">
+              <span>Sparen (20%):</span>
+              <span className="text-green-400">€{savings.toFixed(2)}</span>
+            </div>
+            <div className="flex justify-between text-lg">
+              <span>Fun Money (10%):</span>
+              <span className="text-green-400">€{funMoney.toFixed(2)}</span>
+            </div>
+            <div className="flex justify-between text-lg">
+              <span>Vakantie (10%):</span>
+              <span className="text-green-400">€{vacation.toFixed(2)}</span>
+            </div>
+            <div className="flex justify-between font-medium text-lg mt-3">
+              <span>Vrij Besteedbaar:</span>
+              <span className="text-orange-400">€{finalRemaining.toFixed(2)}</span>
+            </div>
           </div>
         </div>
       </div>
