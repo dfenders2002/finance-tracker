@@ -5,6 +5,7 @@ import { ExpenseForm } from '@/components/ExpenseForm';
 import { IncomeDistributionChart } from '@/components/IncomeDistributionChart';
 import { PersonalOverview } from '@/components/PersonalOverview';
 import type { CalculationData } from '@/components/ExpenseForm';
+import { HouseBuyingCalculator } from '@/components/HouseBuyingCalculator';
 
 export default function Home() {
   const [calculationData, setCalculationData] = useState<CalculationData | null>(null);
@@ -40,7 +41,33 @@ export default function Home() {
                 }}
               />
               
-              {/* Nieuwe Gezamenlijke Totalen Card */}
+              {/* Nieuwe HouseBuyingCalculator */}
+              <HouseBuyingCalculator
+                person1={{
+                  name: calculationData.person1.name,
+                  income: calculationData.person1.income,
+                  monthlySavings: (() => {
+                    const totalExpenses = Object.values(calculationData.person1.expenses).reduce((a, b) => a + b, 0);
+                    const remaining = calculationData.person1.income - totalExpenses;
+                    const funMoney = remaining * (calculationData.person1.funMoneyPercentage / 100);
+                    const vacation = remaining * (calculationData.person1.vacationPercentage / 100);
+                    return remaining - funMoney - vacation; // Dit is wat echt gespaard kan worden
+                  })()
+                }}
+                person2={{
+                  name: calculationData.person2.name,
+                  income: calculationData.person2.income,
+                  monthlySavings: (() => {
+                    const totalExpenses = Object.values(calculationData.person2.expenses).reduce((a, b) => a + b, 0);
+                    const remaining = calculationData.person2.income - totalExpenses;
+                    const funMoney = remaining * (calculationData.person2.funMoneyPercentage / 100);
+                    const vacation = remaining * (calculationData.person2.vacationPercentage / 100);
+                    return remaining - funMoney - vacation; // Dit is wat echt gespaard kan worden
+                  })()
+                }}
+              />
+              
+              {/* Bestaande Gezamenlijke Totalen Card */}
               <div className="mt-6 p-6 bg-gray-800 rounded-lg">
                 <h3 className="text-xl font-semibold mb-4 text-white">Gezamenlijke Totalen</h3>
                 <div className="grid grid-cols-2 gap-4 text-gray-300">
