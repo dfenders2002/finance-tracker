@@ -28,4 +28,15 @@ export interface Person {
   id: "person1" | "person2";
   name: string;
   balance: number;
+  funMoneyPercentage?: number;
+  vacationPercentage?: number;
+}
+
+export interface PersonInputs {
+  name: string;
+  income: number;
+  personalSubscriptions: number;
+  carCosts: number;
+  funMoneyPercentage: number;
+  vacationPercentage: number;
 } 

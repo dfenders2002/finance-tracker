@@ -29,6 +29,8 @@ export interface CalculationData {
       other: number;
     };
     percentage: number;
+    funMoneyPercentage: number;
+    vacationPercentage: number;
   };
   person2: {
     name: string;
@@ -42,9 +44,20 @@ export interface CalculationData {
       other: number;
     };
     percentage: number;
+    funMoneyPercentage: number;
+    vacationPercentage: number;
   };
   totalIncome: number;
   sharedCosts: SharedCosts;
+}
+
+export interface PersonInputs {
+  name: string;
+  income: number;
+  personalSubscriptions: number;
+  carCosts: number;
+  funMoneyPercentage: number;
+  vacationPercentage: number;
 }
 
 export function ExpenseForm({ onCalculate }: { onCalculate: (data: CalculationData) => void }) {
@@ -55,18 +68,22 @@ export function ExpenseForm({ onCalculate }: { onCalculate: (data: CalculationDa
     other: 110, // Internet + TV + Verzekeringen + Gemeente belasting
   });
 
-  const [person1, setPerson1] = useState<Person>({
+  const [person1, setPerson1] = useState<PersonInputs>({
     name: "Daan",
     income: 2630,
     personalSubscriptions: 111.49, // Som van Odido, Lenzen, Sportschool, Github
     carCosts: 250,
+    funMoneyPercentage: 10,
+    vacationPercentage: 10,
   });
 
-  const [person2, setPerson2] = useState<Person>({
+  const [person2, setPerson2] = useState<PersonInputs>({
     name: "Tue Minh",
     income: 1500,
     personalSubscriptions: 0,
     carCosts: 250,
+    funMoneyPercentage: 10,
+    vacationPercentage: 10,
   });
 
   // Bereken de lastenverdeling op basis van inkomen
@@ -92,7 +109,9 @@ export function ExpenseForm({ onCalculate }: { onCalculate: (data: CalculationDa
           carCosts: person1.carCosts,
           other: (sharedCosts.other * person1Percentage) / 100,
         },
-        percentage: person1Percentage
+        percentage: person1Percentage,
+        funMoneyPercentage: person1.funMoneyPercentage,
+        vacationPercentage: person1.vacationPercentage,
       },
       person2: {
         name: person2.name,
@@ -105,7 +124,9 @@ export function ExpenseForm({ onCalculate }: { onCalculate: (data: CalculationDa
           carCosts: person2.carCosts,
           other: (sharedCosts.other * person2Percentage) / 100,
         },
-        percentage: person2Percentage
+        percentage: person2Percentage,
+        funMoneyPercentage: person2.funMoneyPercentage,
+        vacationPercentage: person2.vacationPercentage,
       },
       totalIncome: totalIncome,
       sharedCosts
@@ -154,6 +175,28 @@ export function ExpenseForm({ onCalculate }: { onCalculate: (data: CalculationDa
               className={inputClassName}
             />
           </div>
+          <div>
+            <label className={labelClassName}>Fun Money %</label>
+            <input
+              type="number"
+              min="0"
+              max="100"
+              value={person1.funMoneyPercentage}
+              onChange={(e) => setPerson1({ ...person1, funMoneyPercentage: Number(e.target.value) })}
+              className={inputClassName}
+            />
+          </div>
+          <div>
+            <label className={labelClassName}>Vakantie %</label>
+            <input
+              type="number"
+              min="0"
+              max="100"
+              value={person1.vacationPercentage}
+              onChange={(e) => setPerson1({ ...person1, vacationPercentage: Number(e.target.value) })}
+              className={inputClassName}
+            />
+          </div>
         </div>
 
         {/* Persoon 2 */}
@@ -192,6 +235,28 @@ export function ExpenseForm({ onCalculate }: { onCalculate: (data: CalculationDa
               type="number"
               value={person2.carCosts}
               onChange={(e) => setPerson2({ ...person2, carCosts: Number(e.target.value) })}
+              className={inputClassName}
+            />
+          </div>
+          <div>
+            <label className={labelClassName}>Fun Money %</label>
+            <input
+              type="number"
+              min="0"
+              max="100"
+              value={person2.funMoneyPercentage}
+              onChange={(e) => setPerson2({ ...person2, funMoneyPercentage: Number(e.target.value) })}
+              className={inputClassName}
+            />
+          </div>
+          <div>
+            <label className={labelClassName}>Vakantie %</label>
+            <input
+              type="number"
+              min="0"
+              max="100"
+              value={person2.vacationPercentage}
+              onChange={(e) => setPerson2({ ...person2, vacationPercentage: Number(e.target.value) })}
               className={inputClassName}
             />
           </div>

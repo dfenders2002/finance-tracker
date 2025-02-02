@@ -12,17 +12,24 @@ interface PersonalOverviewProps {
     other: number;
   };
   percentage: number; // Percentage van gezamenlijke kosten
+  funMoneyPercentage: number;
+  vacationPercentage: number;
 }
 
-export function PersonalOverview({ name, income, expenses, percentage }: PersonalOverviewProps) {
+export function PersonalOverview({ 
+  name, 
+  income, 
+  expenses, 
+  percentage,
+  funMoneyPercentage,
+  vacationPercentage 
+}: PersonalOverviewProps) {
   const totalExpenses = Object.values(expenses).reduce((a, b) => a + b, 0);
   const remainingMoney = income - totalExpenses;
 
-  // Verdeling van het overgebleven geld
-  const savings = remainingMoney * 0.20;
-  const funMoney = remainingMoney * 0.10;
-  const vacation = remainingMoney * 0.10;
-  const finalRemaining = remainingMoney - savings - funMoney - vacation;
+  const funMoney = remainingMoney * (funMoneyPercentage / 100);
+  const vacation = remainingMoney * (vacationPercentage / 100);
+  const savings = remainingMoney - funMoney - vacation;
 
   return (
     <div className="p-6 bg-gray-800 rounded-lg">
@@ -68,20 +75,16 @@ export function PersonalOverview({ name, income, expenses, percentage }: Persona
               <span className="text-blue-400">€{remainingMoney.toFixed(2)}</span>
             </div>
             <div className="flex justify-between text-lg">
-              <span>Sparen (20%):</span>
-              <span className="text-green-400">€{savings.toFixed(2)}</span>
-            </div>
-            <div className="flex justify-between text-lg">
-              <span>Fun Money (10%):</span>
+              <span>Fun Money ({funMoneyPercentage}%):</span>
               <span className="text-green-400">€{funMoney.toFixed(2)}</span>
             </div>
             <div className="flex justify-between text-lg">
-              <span>Vakantie (10%):</span>
+              <span>Vakantie ({vacationPercentage}%):</span>
               <span className="text-green-400">€{vacation.toFixed(2)}</span>
             </div>
             <div className="flex justify-between font-medium text-lg mt-3">
-              <span>Vrij Besteedbaar:</span>
-              <span className="text-orange-400">€{finalRemaining.toFixed(2)}</span>
+              <span>Totaal Sparen:</span>
+              <span className="text-orange-400">€{savings.toFixed(2)}</span>
             </div>
           </div>
         </div>
