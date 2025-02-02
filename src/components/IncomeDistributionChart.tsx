@@ -29,16 +29,16 @@ export function IncomeDistributionChart({ totalIncome, totalExpenses }: IncomeDi
   const remaining = remainingMoney - savings - funMoney - vacation;
 
   const legendItems = [
-    { label: 'Huur', color: '#ef4444', value: totalExpenses.rent },
-    { label: 'Boodschappen', color: '#f59e0b', value: totalExpenses.groceries },
-    { label: 'Gas/Water/Licht', color: '#3b82f6', value: totalExpenses.utilities },
-    { label: 'Abonnementen', color: '#8b5cf6', value: totalExpenses.subscriptions },
-    { label: 'Auto', color: '#10b981', value: totalExpenses.carCosts },
-    { label: 'Overige Vaste Lasten', color: '#6b7280', value: totalExpenses.other },
-    { label: 'Sparen (20%)', color: '#60a5fa', value: savings },
-    { label: 'Fun Money (10%)', color: '#f472b6', value: funMoney },
-    { label: 'Vakantie (10%)', color: '#4ade80', value: vacation },
-    { label: 'Resterende', color: '#94a3b8', value: remaining },
+    { label: 'Huur', color: '#dc2626', value: totalExpenses.rent },
+    { label: 'Boodschappen', color: '#15803d', value: totalExpenses.groceries },
+    { label: 'Gas/Water/Licht', color: '#2563eb', value: totalExpenses.utilities },
+    { label: 'Abonnementen', color: '#7c3aed', value: totalExpenses.subscriptions },
+    { label: 'Auto', color: '#f97316', value: totalExpenses.carCosts },
+    { label: 'Overige Vaste Lasten', color: '#737373', value: totalExpenses.other },
+    { label: 'Sparen (20%)', color: '#fbbf24', value: savings },
+    { label: 'Fun Money (10%)', color: '#ec4899', value: funMoney },
+    { label: 'Vakantie (10%)', color: '#06b6d4', value: vacation },
+    { label: 'Resterende', color: '#22c55e', value: remaining },
   ];
 
   useEffect(() => {
@@ -78,16 +78,16 @@ export function IncomeDistributionChart({ totalIncome, totalExpenses }: IncomeDi
           remaining,
         ],
         backgroundColor: [
-          '#ef4444', // rood voor huur
-          '#f59e0b', // oranje voor boodschappen
-          '#3b82f6', // blauw voor utilities
-          '#8b5cf6', // paars voor abonnementen
-          '#10b981', // groen voor auto
-          '#6b7280', // grijs voor overig
-          '#60a5fa', // lichtblauw voor sparen
-          '#f472b6', // roze voor fun
-          '#4ade80', // lichtgroen voor vakantie
-          '#94a3b8', // grijs voor resterend
+          '#dc2626',
+          '#15803d',
+          '#2563eb',
+          '#7c3aed',
+          '#f97316',
+          '#737373',
+          '#fbbf24',
+          '#ec4899',
+          '#06b6d4',
+          '#22c55e',
         ],
       }],
     };
