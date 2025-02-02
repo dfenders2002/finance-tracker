@@ -31,6 +31,9 @@ export function PersonalOverview({
   const vacation = remainingMoney * (vacationPercentage / 100);
   const savings = remainingMoney - funMoney - vacation;
 
+  // Bereken het totale spaarpercentage van het inkomen
+  const totalSavingsPercentage = (savings / income) * 100;
+
   return (
     <div className="p-6 bg-gray-800 rounded-lg">
       <h2 className="text-2xl font-semibold mb-6 text-white text-center">{name} - Persoonlijk Overzicht</h2>
@@ -83,7 +86,7 @@ export function PersonalOverview({
               <span className="text-green-400">€{vacation.toFixed(2)}</span>
             </div>
             <div className="flex justify-between font-medium text-lg mt-3">
-              <span>Totaal Sparen:</span>
+              <span>Totaal Sparen ({totalSavingsPercentage.toFixed(1)}% van inkomen):</span>
               <span className="text-orange-400">€{savings.toFixed(2)}</span>
             </div>
           </div>
